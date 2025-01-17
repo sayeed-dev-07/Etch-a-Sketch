@@ -1,46 +1,59 @@
-body {
+*{
     margin: 0;
     padding: 0;
-}
-
-.container {
-    margin-top: 40px;
-    width: 960px;
-    height: auto;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-
-}
-
-.innerDiv {
-    display: flex;
     box-sizing: border-box;
+    font-size: inherit; 
+    background-color: rgb(175, 186, 196);
+}
+
+.main-container{
+    margin: 2rem 0rem;
+    height: calc(100vh - 6rem);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.create-div{
+    padding: 1rem 3rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 10px;
     
 }
+.title{
+    font-weight: 600;
+    font-size:2rem ;
+    margin-bottom: 1rem;
+    
+}
+.reset{
+    padding: 1rem 3rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
 
-.childDiv {
-    height: 30px;
-    width: 30px;
-    border: 1px solid black;
-    margin: 1px;
+button:hover{
+    background-color: white;
+    color: black;
+}
+.div-container{
+    height:600px;
+
+    width: 600px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+
+}
+.innerDiv{
+    background-color: whitesmoke;
     box-sizing: border-box;
-}
-.btndiv , .choose-div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 40px;
-}
-button{
-    font-size: large;
-    font-weight: bold;
-    background: black;
-    color: white;
-    padding: 10px 35px;
-    border: none;
-    border-radius: 4px;
+    border: 1px solid black;
+    aspect-ratio: 1/1;
     cursor: pointer;
 }

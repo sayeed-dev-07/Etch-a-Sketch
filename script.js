@@ -1,71 +1,83 @@
-const container = document.querySelector('.container');
-const chooseBtn = document.querySelector('.choose');
-const resetBtn = document.querySelector('.reset');
+const userInputBtn = document.querySelector('.create-div');
+const divContainer = document.querySelector('.div-container');
+const resetBtn = document.querySelector('.reset')
 
 
-
-function createDivs(amount) {
-    
-    container.innerHTML = '';
-
-    
-    const containerWidth = container.clientWidth;
-    const containerHeight = 680; 
-    const totalDivs = amount * amount;
-
-    
-    const childSize = Math.floor(Math.min(containerWidth / amount, containerHeight / amount));
-
-    
-    for (let i = 0; i < amount; i++) {
-        const innerDiv = document.createElement('div');
-        innerDiv.className = 'innerDiv';
-        container.appendChild(innerDiv);
-
-        for (let j = 0; j < amount; j++) {
-            const childDiv = document.createElement('div');
-            childDiv.className = 'childDiv';
-            childDiv.style.width = `${childSize}px`;
-            childDiv.style.height = `${childSize}px`;
-            innerDiv.appendChild(childDiv);
-        }
-    }
-}
-
-
-
-
-chooseBtn.addEventListener('click',()=>{
-    const unserInput = prompt("Enter the number of rows and coloumns you want : ")
-    if (unserInput > 100) {
-        alert('You cant create rows and coloumns more than 100 !!')
-    }else if(unserInput <= 0){
-        alert('Enter a valid number !!')
-    }else{
-        createDivs(unserInput);
-        const childDivs = document.querySelectorAll('.childDiv');
-        childDivs.forEach(divs => {
-            divs.addEventListener('mouseenter', (e)=>{
-                divs.style.backgroundColor = getRandomColor();
-            })
-        })
-    }
+userInputBtn.addEventListener('click', () => {
+    let number = window.prompt('Enter the Numbers of Blocks You want in the Board : ')
+    validateInput(number)
     
 })
 
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
+
+function validateInput(input) {
+    if (isNaN(input) || input > 100 || input < 0) {
+        window.alert('ERROR! , ENTER A VALID NUMBER AND ALSO LESS THAN 100')
+        return;
     }
-    return color;
+    createDiv(input)
+    
 }
 
-function resetAll() {
-    const childDivs = document.querySelectorAll('.childDiv');
-    childDivs.forEach(div => {
-        div.style.backgroundColor = '#ffffff'
+function createDiv(num) {
+    divContainer.innerHTML = '';
+    divContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`
+    divContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`
+
+    for (let i = 0; i < num * num; i++) {
+        const element = document.createElement('div');
+        element.classList.add('innerDiv')
+        divContainer.appendChild(element)
+    }
+
+    const innerDivs = document.querySelectorAll('.innerDiv');
+
+
+    innerDivs.forEach(element => {
+        element.addEventListener('mouseover', () => {
+           
+            element.style.background = `${colorChange()}`
+            
+        });
+    });
+
+    resetBtn.addEventListener('click', () => {
+        innerDivs.forEach((div) => {
+            div.style.backgroundColor = 'whitesmoke'; 
+        })
     })
+
 }
-resetBtn.addEventListener('click',resetAll)
+
+
+
+
+
+
+
+function colorChange() {
+    const hexArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+    let code = "#";
+    for (let i = 0; i < 6; i++) {
+        let randNum = Math.floor(Math.random() * 16)
+        code += hexArray[randNum]
+    }
+    return code;
+}
+
+
+const innerDivs = document.querySelectorAll('.innerDiv');
+    
+    innerDivs.forEach(element => {
+
+        element.addEventListener('mouseover', () => {
+            element.style.backgroundColor = `${colorChange()}`
+        });
+    });
+
+
+    resetBtn.addEventListener('click', () => {
+        innerDivs.forEach((div) => {
+            div.style.backgroundColor = 'whitesmoke';
+        })
+    })
